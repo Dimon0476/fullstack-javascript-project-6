@@ -1,0 +1,11 @@
+extends ../layouts/app-cover.pug
+
+block content
+  main.px-3
+    //- .card-body.p-5.bg-light
+    h1= t('views.welcome.index.hello')
+    p.lead= t('views.welcome.index.description')
+    
+    //- a.btn.btn-primary.btn-lg(href="https://hexlet.io")= t('views.welcome.index.more')
+    p.lead
+      a.btn.btn-lg.btn-secondary.fw-bold.border-white.bg-white(href='https://hexlet.io')= t('views.welcome.index.more')

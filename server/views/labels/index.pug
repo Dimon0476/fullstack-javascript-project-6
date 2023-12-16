@@ -1,0 +1,25 @@
+extends ../layouts/application.pug
+
+block header
+  = t('views.labels.heading')
+
+block content
+  a.nav-link(href=route('newLabel'))= t('views.labels.actions.new')
+  table.table.table-striped.table-dark
+    thead
+      tr
+        th= t('views.labels.id')
+        th= t('views.labels.name')
+        th= t('views.labels.createdAt')
+        th
+    tbody
+      each label in labels
+        tr
+          td= label.id
+          td= label.name
+          td= formatDate(label.createdAt)
+          td
+            a(href=route('openForEditLabel', { id: label.id}))= t('views.labels.actions.edit')
+            form(action=route('deleteLabel', { id: label.id}), method='post')
+              input(name='_method', type='hidden', value='delete')
+              input.btn.btn-link(type='submit', value= t('views.labels.actions.delete'))

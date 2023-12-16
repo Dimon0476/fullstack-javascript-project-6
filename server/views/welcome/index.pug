@@ -1,0 +1,9 @@
+extends ../layouts/application.pug
+
+block content
+  main.px-3
+    h1= t('views.welcome.index.hello')
+    p.lead= t('views.welcome.index.description')
+    
+    p.lead
+      a.btn.btn-lg.btn-secondary.fw-bold.border-white.bg-white(href='https://hexlet.io')= t('views.welcome.index.more')

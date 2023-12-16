@@ -1,0 +1,16 @@
+[
+  {
+    "name": "задача 1",
+    "description": "описание 1",
+    "statusId": 1,
+    "creatorId": 2,
+    "executorId": 1
+  },
+  {
+    "name": "задача 2",
+    "description": "описание 2",
+    "statusId": "2",
+    "creatorId": 1,
+    "executorId": "2"
+  }
+]

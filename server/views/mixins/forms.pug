@@ -1,0 +1,92 @@
+- const getInputName = (property) => `data[${property}]`
+- const getInputId = (property) => `data_${property}`
+- const getFilterId = (property) => `data_${property}`
+
+mixin formFor(entity = null)
+  form&attributes(attributes)
+    block
+
+mixin input(entity, propertyName, labelText, errors = {})
+  - propertyErrors = _.get(errors, propertyName)
+  - classLine = 'form-control' + (_.isEmpty(propertyErrors) ? '' : ' is-invalid')
+  - inputId = getInputId(propertyName)
+  .mb-3(class=(errors[propertyName] && 'has-danger'))
+    label(
+      for= inputId
+    )= labelText
+    input(
+      id= inputId
+      name=getInputName(propertyName)
+      class=classLine
+      value=_.get(entity, propertyName, '')
+    )&attributes(attributes)
+    if !_.isEmpty(propertyErrors)
+      .invalid-feedback= propertyErrors.map(({ message }) => message).join('. ')
+
+mixin select(entity, propertyName, labelText, options, errors = {})
+  - propertyErrors = _.get(errors, propertyName)
+  - classLine = 'form-control' + (_.isEmpty(propertyErrors) ? '' : ' is-invalid')
+  - inputId = getInputId(propertyName)
+  .mb-3(class=(errors[propertyName] && 'has-danger'))
+    label(
+      for= inputId
+    )= labelText
+    select(
+      id= inputId
+      name=getInputName(propertyName)
+      class=classLine
+    )&attributes(attributes)
+      if (!_.has( attributes, 'multiple'))
+        - selectedId=_.get(entity, propertyName, '')
+        option
+        each item in options
+          option(value = item.id selected= (item.id === selectedId) ? "selected" : false)= item.name
+      else
+        - selectedIds=_.get(entity, propertyName, [])
+        each item in options
+          - isSelect = selectedIds.includes(item.id) ? "selected" : false
+          option(value = item.id selected= isSelect)= item.name
+    if !_.isEmpty(propertyErrors)
+      .invalid-feedback= propertyErrors.map(({ message }) => message).join('. ')
+
+mixin textarea(entity, propertyName, labelText)
+  - classLine = 'form-control'
+  - inputId = getInputId(propertyName)
+  .mb-3
+    label(
+      for= inputId
+    )= labelText
+    textarea(
+      id= inputId
+      name=getInputName(propertyName)
+      class=classLine
+    )= _.get(entity, propertyName, '')
+
+mixin submit(form = null)
+  input(class='btn btn-primary' type='submit')&attributes(attributes)
+
+mixin buttonTo(action, method)
+  form(action=action, method="post")
+    input(name="_method" type="hidden" value=method)
+    input(type='submit')&attributes(attributes)
+
+
+mixin filterSelect(entity, propertyName, labelText, options)
+  - classLine = 'form-select'
+  - filterId = getFilterId(propertyName)
+  - selectedId=_.get(entity, propertyName, '')
+  .input-group.mb-3(class='')
+    label.input-group-text(
+      for= filterId
+    )= labelText
+    select(
+      id= filterId
+      name= propertyName
+      class= classLine
+    )&attributes(attributes)
+      option
+      each item in options
+        option(
+          value = item.id 
+          selected= (item.id === selectedId) ? "selected" : false
+        )= item.name

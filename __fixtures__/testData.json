@@ -1,0 +1,118 @@
+{
+  "users": {
+    "new": {
+      "email": "malika_hodkiewicz75@live.com",
+      "password": "RLJvaIgPOnX5r03",
+      "firstName": "malika",
+      "lastName": "hodkiewicz"
+    },
+    "existing": {
+      "email": "lawrence.kulas87@outlook.com",
+      "password": "O6AvLIQL1cbzrre",
+      "firstName": "lawrence",
+      "lastName": "kulas"
+    },
+    "updated": {
+      "email": "lawrence.kulas87@yandex.com",
+      "password": "newPassword",
+      "firstName": "Lawrence",
+      "lastName": "Kulas"
+    }
+  },
+  
+  "taskStatuses": {
+    "existing": {
+      "name": "новый"
+    },
+    "updated": {
+      "name": "на проверке"
+    },
+    "unrelated":   {
+      "name": "завершен"
+    }
+  },
+
+  "labels": {
+    "existing": {
+      "name": "bug"
+    },
+    "updated": {
+      "name": "debug"
+    },
+    "unrelated":   {
+      "name": "completed"
+    }
+  },
+
+  "tasks": {
+    "new": {
+      "data": {
+        "name": "Реализовать тестрирование",
+        "description": "проверка работы создания новых заданий",
+        "statusId": "1",
+        "creatorId": 2,
+        "executorId": "3",
+        "labels": ["1", "2", "{\"name\":\"newLabelName\"}"]
+      },
+      "raw" : {
+        "status": {
+          "name": "новый"
+        },
+        "creator": {
+          "email": "lawrence.kulas87@outlook.com",
+          "password": "O6AvLIQL1cbzrre",
+          "firstName": "lawrence",
+          "lastName": "kulas"
+        },
+        "executor": {
+          "email": "nona_murray@yahoo.com",
+          "passwordDigest": "760391e7dceb3cf65ee23e97ca3db8c1515d18c3434b003c1fd781053afcf86f",
+          "firstName": "nona",
+          "lastName": "murray"
+        }
+      }
+    },
+    "existing": {
+      "data": {
+        "name": "задача 1",
+        "description": "описание 1",
+        "statusId": 1,
+        "creatorId": 2,
+        "executorId": 1
+      },
+      "relate": {
+        "labels": "2"
+      }
+    },
+    "filter": {
+      "status": "1",
+      "executor": "1",
+      "label": "1",
+      "isCreatorUser": "on"
+    },
+    "firlterEmpty": {
+      "status": "",
+      "executor": "",
+      "label": ""
+    },
+    "alternative": {
+      "data":  {
+        "name": "задача 2",
+        "description": "описание 2",
+        "statusId": 2,
+        "creatorId": 1,
+        "executorId": 2
+      }
+    },
+    "updated":  {
+      "data": {
+        "name": "Обновленная задача 1",
+        "description": "Обновленое описание  задачи 1",
+        "statusId": 2,
+        "creatorId": 2,
+        "executorId": 1,
+        "labels": ["1", "2", "{\"name\":\"newLabelName\"}"]
+      }
+    }
+  }
+}

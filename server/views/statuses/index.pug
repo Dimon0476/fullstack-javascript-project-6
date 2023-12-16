@@ -1,0 +1,25 @@
+extends ../layouts/application.pug
+
+block header
+  = t('views.statuses.heading')
+
+block content
+  a.nav-link(href=route('newStatus'))= t('views.statuses.actions.new')
+  table.table.table-striped.table-dark
+    thead
+      tr
+        th= t('views.statuses.id')
+        th= t('views.statuses.name')
+        th= t('views.statuses.createdAt')
+        th
+    tbody
+      each status in statuses
+        tr
+          td= status.id
+          td= status.name
+          td= formatDate(status.createdAt)
+          td
+            a(href=`/statuses/${status.id}/edit`)= t('views.statuses.actions.edit')
+            form(action=`/statuses/${status.id}`, method='post')
+              input(name='_method', type='hidden', value='delete')
+              input.btn.btn-link(type='submit', value= t('views.statuses.actions.delete'))

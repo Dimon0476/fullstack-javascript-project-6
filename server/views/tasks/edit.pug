@@ -1,0 +1,45 @@
+extends ../layouts/application.pug
+
+block header
+  = t('views.tasks.edit.header')
+
+block content
+  +formFor()(action=`/tasks/${task.id}` method='post')
+    +input(task, 'name', t('views.tasks.name'), errors)(type="text")
+    +textarea(task, 'description', t('views.tasks.description'))
+    +select(task, 'statusId', t('views.tasks.status'), statuses,  errors)
+    +select(task, 'executorId', t('views.tasks.executor'), users, errors)
+    //- #data_labels
+    +select(task, 'labels', t('views.tasks.labels'), labels, errors)(multiple)
+    .d-flex
+      input(class="form-control" type="text" id="data_newLabel" form=null
+          placeholder= t('views.tasks.newLabel.placeholder'))
+      button(class='ms-3 btn btn-primary' id="btnAdd" align="bottom")= t('views.tasks.actions.newLabel')
+
+    br
+    input(name="_method" type="hidden" value="patch")
+    +submit(task)(value=t('views.tasks.edit.submit'))
+
+  script.
+    const btnAdd = document.querySelector('#btnAdd');
+    const selectLabels = document.querySelector('#data_labels');
+    const inputData = document.querySelector('#data_newLabel');
+
+    btnAdd.onclick = (e) => {
+      e.preventDefault();
+
+      // validate the option
+      if (inputData.value == '') {
+        // 'Please enter the name label.'
+        alert('#{t('views.tasks.newLabel.alert')}');
+        return;
+      }
+      // create a new option
+      const option = new Option(inputData.value, JSON.stringify({ name: inputData.value }));
+      // add it to the list
+      selectLabels.add(option, undefined);
+
+      // reset the value of the input
+      inputData.value = '';
+      inputData.focus();
+    };
